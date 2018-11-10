@@ -1,0 +1,9 @@
+[
+    {
+        "caption": "ExecInput: Send input",
+        "command": "exec_input",
+        "args": {
+            "quiet": true
+        }
+    }
+]

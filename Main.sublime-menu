@@ -1,0 +1,39 @@
+[
+    {
+        "id": "tools",
+        "children": [
+            {
+                "id": "build"
+            },
+            {
+                "caption": "Send input",
+                "command": "exec_input",
+                "args": {
+                    "quiet": true
+                }
+            }
+        ]
+    },
+    {
+        "id": "preferences",
+        "children": [
+            {
+                "id": "package-settings",
+                "children": [
+                    {
+                        "caption": "ExecInput",
+                        "children": [
+                            {
+                                "caption": "Key Bindings",
+                                "command": "edit_settings",
+                                "args": {
+                                    "base_file": "${packages}/ExecInput/Default ($platform).sublime-keymap"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
