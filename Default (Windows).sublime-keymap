@@ -3,6 +3,13 @@
         "keys": [
             "ctrl+alt+enter"
         ],
-        "command": "exec_input"
+        "command": "exec_input",
+        "context": [
+            {
+                "key": "panel",
+                "operator": "equal",
+                "operand": "output.exec"
+            }
+        ]
     }
 ]

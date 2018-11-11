@@ -13,7 +13,8 @@ build targets that extend the default `ExecCommand` class.
 Make sure to start a process that is waiting for input. Now there are multiple
 ways to send input:
 
-- Using the default key binding: Ctrl+Alt+Enter
+- Using the default key binding while the build output panel is visible:
+    Ctrl+Alt+Enter
 - Using the menu item `Tools` → `Send input`
 - Using the `Command Palette` item `ExecInput: Send input`
 

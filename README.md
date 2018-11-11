@@ -31,8 +31,8 @@ The easiest way to install is using Sublime Text's [Package Control]
 Make sure to start a process that is waiting for input. Now there are multiple
 ways to send input:
 
-- Using the default key binding: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+
-    <kbd>Enter</kbd>
+- Using the default key binding while the build output panel is visible:
+    <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Enter</kbd>
 - Using the menu item `Tools` → `Send input`
 - Using the `Command Palette` item `ExecInput: Send input`
 
