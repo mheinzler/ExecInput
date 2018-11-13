@@ -2,6 +2,7 @@
 
 import codecs
 import os
+import threading
 
 import sublime
 import sublime_plugin
@@ -74,11 +75,12 @@ class ExecInputCommand(sublime_plugin.WindowCommand):
             encoder = encoder_cls('replace')
             data = encoder.encode(input)
 
-            # write to stdin
-            try:
-                os.write(exec.proc.proc.stdin.fileno(), data)
-            except OSError:
-                pass
+            # write to the process' stdin using a separate thread to avoid
+            # deadlocks
+            threading.Thread(
+                target=self.write_fileno,
+                args=(exec.proc.proc.stdin.fileno(), data)
+            ).start()
 
             # also write the input to the output panel
             exec.on_data(exec.proc, input)
@@ -104,6 +106,16 @@ class ExecInputCommand(sublime_plugin.WindowCommand):
         :returns: True if enabled, False otherwise.
         """
         return self.get_exec(quiet=quiet) is not None
+
+    @classmethod
+    def write_fileno(cls, fileno, data):
+        """
+        Write data to a file descriptor.
+
+        :param fileno: The file descriptor to write to.
+        :param data:   The data to write.
+        """
+        os.write(fileno, data)
 
 
 def run(self, *args, **kwargs):
