@@ -12,8 +12,8 @@ build targets that extend the default `ExecCommand` class.
 
 ### Package Control
 
-The easiest way to install is using Sublime Text's [Package Control]
-[package-control]:
+The easiest way to install is using Sublime Text's
+[Package Control][package-control]:
 
 - Open the `Command Palette` using the menu item `Tools` → `Command Palette...`
 - Choose `Package Control: Install Package`
