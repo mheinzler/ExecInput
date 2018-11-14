@@ -70,20 +70,11 @@ class ExecInputCommand(sublime_plugin.WindowCommand):
         # send the input
         exec = self.get_exec()
         if exec:
-            # encode the input
-            encoder_cls = codecs.getincrementalencoder(exec.encoding)
-            encoder = encoder_cls('replace')
-            data = encoder.encode(input)
-
-            # write to the process' stdin using a separate thread to avoid
-            # deadlocks
+            # write to the process using a separate thread to avoid deadlocks
             threading.Thread(
-                target=self.write_fileno,
-                args=(exec.proc.proc.stdin.fileno(), data)
+                target=self.write_input,
+                args=(exec, input)
             ).start()
-
-            # also write the input to the output panel
-            exec.on_data(exec.proc, input)
 
         # restore the previous panel
         self.restore_panel()
@@ -108,14 +99,25 @@ class ExecInputCommand(sublime_plugin.WindowCommand):
         return self.get_exec(quiet=quiet) is not None
 
     @classmethod
-    def write_fileno(cls, fileno, data):
+    def write_input(cls, exec, input):
         """
-        Write data to a file descriptor.
+        Write input to the current process of a ExecCommand instance.
 
-        :param fileno: The file descriptor to write to.
-        :param data:   The data to write.
+        :param exec:  An instance of the ExecCommand class.
+        :param input: The input to write.
         """
-        os.write(fileno, data)
+
+        # first write the input to the output panel to show it before any new
+        # output of the process
+        exec.on_data(exec.proc, input)
+
+        # encode the input
+        encoder_cls = codecs.getincrementalencoder(exec.encoding)
+        encoder = encoder_cls('replace')
+        data = encoder.encode(input)
+
+        # write the data to the process' stdin
+        os.write(exec.proc.proc.stdin.fileno(), data)
 
 
 def run(self, *args, **kwargs):
