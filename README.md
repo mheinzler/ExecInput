@@ -43,7 +43,7 @@ Multiple lines of input can be send by using <kbd>Shift</kbd>+<kbd>Enter</kbd>.
 
 ## Customization
 
-This packages provides the command `exec_input`. Use this if you want to
+This package provides the command `exec_input`. Use this if you want to
 customize the key bindings, menu items, etc.
 
 [package-control]: https://packagecontrol.io/installation
