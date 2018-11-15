@@ -15,13 +15,17 @@ original_run = ExecCommand.run
 class ExecInputCommand(sublime_plugin.WindowCommand):
     """Command to send input to a process through the exec build target."""
 
-    def run(self):
-        """Run the command."""
+    def run(self, quiet=False):
+        """
+        Run the command.
+
+        :param quiet: Whether to show an error if there is no process.
+        """
 
         # save the currently visible panel
         self.previous_panel = self.window.active_panel()
 
-        if self.get_exec():
+        if self.get_exec(quiet=quiet):
             # ask for the input
             self.window.show_input_panel(
                 "Input", "", self.send_input, None, self.restore_panel)
