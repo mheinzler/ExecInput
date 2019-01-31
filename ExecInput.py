@@ -7,9 +7,9 @@ import threading
 import sublime
 import sublime_plugin
 
-from Default.exec import ExecCommand
+from Default import exec
 
-original_run = ExecCommand.run
+original_run = exec.ExecCommand.run
 
 
 class ExecInputCommand(sublime_plugin.WindowCommand):
@@ -143,11 +143,11 @@ def plugin_loaded():
     """Call when the package is loaded."""
 
     # overwrite the original run method
-    ExecCommand.run = run
+    exec.ExecCommand.run = run
 
 
 def plugin_unloaded():
     """Call when the package is unloaded."""
 
     # restore the original run method
-    ExecCommand.run = original_run
+    exec.ExecCommand.run = original_run
